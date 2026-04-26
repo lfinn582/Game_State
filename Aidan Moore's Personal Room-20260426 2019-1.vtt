@@ -1,0 +1,137 @@
+WEBVTT
+
+1 "Aidan Moore" (239425280)
+00:00:32.790 --> 00:00:48.360
+This is the methodology for model two. This model is a collective probability model. It essentially takes.
+
+2 "Aidan Moore" (239425280)
+00:00:48.360 --> 00:01:05.850
+A similarity score on every single data point in our set and out of a sample of that set, which is about 10000 out of the hundred thousand data points that we have, creates a similarity score in relation to that point.
+
+3 "Aidan Moore" (239425280)
+00:01:05.850 --> 00:01:21.900
+Finally, the points which have a similarity score which is above a certain threshold, we collate the results from each of those matches, be it home wind draw or away win.
+
+4 "Aidan Moore" (239425280)
+00:01:21.900 --> 00:01:41.900
+And the plurality wins, and that is the vote for that particular point. These are the outcomes that we have for this model. Obviously it has fairly high accuracy for a ternary classification model because we have three different outcomes.
+
+5 "Aidan Moore" (239425280)
+00:01:41.900 --> 00:01:46.740
+The accuracy of .55 is actually relatively good. The.
+
+6 "Aidan Moore" (239425280)
+00:01:46.740 --> 00:02:06.660
+Difficulty is this model requires quite a large sample size for each instance, and so it doesn't really work as well when you have a relatively small sample size of only around 7200 matches.
+
+7 "Aidan Moore" (239425280)
+00:02:08.730 --> 00:02:28.730
+The parameters that we chose after manual testing was 10000 similar samples in order to save on a little bit of computational power, correlational features, the ones that we are going to use anyway in this similarity score calculation was when they.
+
+8 "Aidan Moore" (239425280)
+00:02:28.730 --> 00:02:47.160
+You have an absolute value above .2 as your r square value and a similarity score of .9 to include in the similar samples category. Our next model is the neural network model.
+
+9 "Aidan Moore" (239425280)
+00:02:47.160 --> 00:03:07.160
+The method we have here is essentially a unlabeled neural network. We have three hidden layers. We have around 25 input layers and three output layers being our homewind draw.
+
+10 "Aidan Moore" (239425280)
+00:03:07.160 --> 00:03:14.100
+Kind of way when we use batch normalization, a reluve activation function, and drop out after layer one.
+
+11 "Aidan Moore" (239425280)
+00:03:14.100 --> 00:03:33.960
+As well as kernels and stratification in between hidden layers. Atom optimizer really helped us to adjust the learning rate in between. However, in order to really nail down which features were important besides the ones that we know the best.
+
+12 "Aidan Moore" (239425280)
+00:03:33.960 --> 00:03:52.500
+Which are score and time. We actually implemented about a hundred and 80 models of neural networks in order to essentially independently.
+
+13 "Aidan Moore" (239425280)
+00:03:52.500 --> 00:04:10.230
+Analyze, the game state, sands these two score and time bins, and because we have nine score bins, which are essentially minus four all the way up to plus four and 20 time bins essentially every 5 min of both games.
+
+14 "Aidan Moore" (239425280)
+00:04:10.230 --> 00:04:25.410
+We have one permutation per model and at a batch size of 32 samples before we'd update, that is how we trained our model. Due to the heavy computational load over everything.
+
+15 "Aidan Moore" (239425280)
+00:04:25.410 --> 00:04:40.589
+Hyperimeter tuning depth, kernel size, and stratification was super duper computationally taxing, and so we only tuned it a couple of times and just took the.
+
+16 "Aidan Moore" (239425280)
+00:04:40.589 --> 00:04:56.369
+Most highest performing model we could. This results in quite a heavy majority bias, as in home win was super duper common as a prediction.
+
+17 "Aidan Moore" (239425280)
+00:04:56.369 --> 00:05:16.369
+Hence, on the bottom here, we see as the score difference is negative, i. E. In favor of the home team for this model. Accuracy is super high. Withdraw, it's about a coin flip as a ternary classification goes is about .33.
+
+18 "Aidan Moore" (239425280)
+00:05:16.369 --> 00:05:19.889
+And when the awaiting wins.
+
+19 "Aidan Moore" (239425280)
+00:05:19.889 --> 00:05:39.629
+Performance is super duper duper poor because it almost never predicts away team winning. Overall, the most important features that we found aside from time and score scenario, was prematch expected points as a proxy for team strength.
+
+20 "Aidan Moore" (239425280)
+00:05:39.629 --> 00:05:56.729
+The red card differential was super duper influential as was attacking subcount. However, attacking subcount was not necessarily causality related, instead, teams who are losing and wanting to chase the game lading games.
+
+21 "Aidan Moore" (239425280)
+00:05:56.729 --> 00:06:16.729
+Often will make lots of attacking subs in order to do so, and that doesn't necessarily cause them to lose as much, more so it's just correlated with teams who are losing at the time. In terms of ranking models by performance I think the probability model performs the best simply because there's little bias issues and.
+
+22 "Aidan Moore" (239425280)
+00:06:16.729 --> 00:06:18.299
+Is computationally efficient?
+
+23 "Aidan Moore" (239425280)
+00:06:18.299 --> 00:06:38.299
+And the only limitation to sample size. Can N performed surprisingly well. However, there was, event related bias because the samples of the data that we fed into the cann was not the 5 min snapshots but was instead every event. The HDP scan.
+
+24 "Aidan Moore" (239425280)
+00:06:38.299 --> 00:06:51.779
+Can performed 3rd best only because it's very, very uncommunicable and it's very difficult to make predictions off of pure clustering from unsupervised learning and their neural network performs the worst.
+
+25 "Aidan Moore" (239425280)
+00:06:51.779 --> 00:07:11.779
+Because simply put, it was way too computationally taxing and we couldn't tune it. In the future, we want to tune the neural network. We want to add match momentum as a proxy for quality of play, i. E. How dangerous each team is and how likely.
+
+26 "Aidan Moore" (239425280)
+00:07:11.779 --> 00:07:14.909
+They are to score or concede respectively.
+
+27 "Aidan Moore" (239425280)
+00:07:14.909 --> 00:07:34.909
+The last five and last 15 min as well as cumulative momentum would be super duper helpful as features. Instead of just using pre match odds and pre match expected points, separating out how much home advantage is a team quality metric, i. E. An ELO score of some sort, and matchup factors like recent.
+
+28 "Aidan Moore" (239425280)
+00:07:34.909 --> 00:07:45.479
+Head to head results as a relative strength team proxy would be super duper effective, and finally blending models on aspects of any features we have business understanding of essentially.
+
+29 "Aidan Moore" (239425280)
+00:07:45.479 --> 00:08:01.889
+If you blend the past data with predictions for future data, i. E. The laden matches, the past trends are much more likely going to be impactful.
+
+30 "Aidan Moore" (239425280)
+00:08:01.889 --> 00:08:17.969
+Versus on future data, you are early in games likely going to much more biased towards team strength metrics as opposed to the in match metrics. As far as key takeaways go.
+
+31 "Aidan Moore" (239425280)
+00:08:17.969 --> 00:08:37.969
+Conducting all data in a really short span of time so that we don't have inconsistent sources like we did here with the collation between FBREF data and our API from football.org. Consistent preprocessing across models will help with comparability.
+
+32 "Aidan Moore" (239425280)
+00:08:37.969 --> 00:08:46.979
+Would be that the HDV scan and the KNN having differently pre processed models, differently preprocessed data than.
+
+33 "Aidan Moore" (239425280)
+00:08:46.979 --> 00:09:05.399
+The neural network and probability model, of course increased computational power will obviously help and obtaining the features that we want as a priority so that we don't have to source from multiple different sources and impute data where we have to.
+
+34 "Aidan Moore" (239425280)
+00:09:05.399 --> 00:09:21.989
+Is gonna be super important. Were we to do anything next time? And here are our links. Thank you.
