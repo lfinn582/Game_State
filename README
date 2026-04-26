@@ -1,0 +1,28 @@
+Welcome to our Game State project!
+
+Authors: Aidan M., Liam F., Matthew M.
+
+Project Goals: 
+  Game state represents the accumulated events and conditions at any moment in a football match, including score, substitutions remaining, red 
+cards, and time. Each of these events is irreversible and directly shapes how teams behave strategically. Goals shift match incentives 
+immediately, forcing losing teams to attack more aggressively while encouraging leading teams to protect their advantage. Substitutions are 
+limited resources that alter tactics, formations, and player roles, and are used differently depending on whether a team is chasing the game or 
+preserving a lead. Time remaining in the match tightens these strategic pressures, reducing the window for creating or preventing goals. Red 
+cards impose significant structural disadvantages but may still be strategically optimal in situations like DOGSO, where conceding a red card 
+prevents a high-probability scoring opportunity.
+
+  This project analyzes these components collectively, alongside match difficulty (team strength differences and home/away status), to develop 
+a prescriptive win-probability model. By constructing a multidimensional Pareto frontier, the model identifies when key decisions such as 
+committing a tactical foul, making substitutions to defend a lead, or making substitutions to chase a deficit produce positive expected value. 
+Unlike traditional descriptive tools, this model is designed to advise coaches by mapping game state inputs to optimal decision timings.
+
+
+Installation:
+  Download the desired data, the suggestion is '5-minute-breakdown-All-Final.csv' and 'All_Data_Final_Fixed.csv' as they are the primary data 
+used for training the models. Once the programs are downloaded they can simplely be run.
+
+Information:
+  When using the API call a premium membership on football-data.org is required to collect the needed information. Furthermore the league 
+codes need to be changed as well as year depending on which league and year is being collected. For data collection the program was 
+originally built around La Liga as it was the first to be collected but it can be easily adjusted for any league available on football-
+data.org.
